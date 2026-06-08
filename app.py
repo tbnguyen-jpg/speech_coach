@@ -30,5 +30,7 @@ def upload_file():
         return f"Saved: {file.filename}"
 
     return "No file selected"
-if "__name__"=="__main__":
+
+if __name__ == "__main__":
+    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     app.run(debug=True)
