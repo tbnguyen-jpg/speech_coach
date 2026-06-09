@@ -1,6 +1,6 @@
-from flask import Flask
-from flask import render_template
-from flask import request
+from flask import Flask, render_template, request
+from openai import OpenAI
+from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
@@ -18,18 +18,25 @@ def upload_file():
 
     file = request.files["audio"]
 
-    if file.filename != "":
+    if file.filename == "":
+        return "No file selected"
+    
+    save_path = os.path.join(
+        app.config["UPLOAD_FOLDER"],
+        file.filename
+    )
 
-        save_path = os.path.join(
-            app.config["UPLOAD_FOLDER"],
-            file.filename
+    file.save(save_path)
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    with open(save_path, "rb") as audio_file:
+        transcript = client.audio.transcriptions.create(
+        model="whisper-1",
+        file=audio_file
         )
+    text = transcript.text
 
-        file.save(save_path)
+    return f"<h2>Trancript:</h2><p>{text}</p>"
 
-        return f"Saved: {file.filename}"
-
-    return "No file selected"
 
 if __name__ == "__main__":
     os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
