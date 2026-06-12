@@ -2,11 +2,13 @@
     <title>Voca Light Logo</title>
     <desc>Five vertical rounded bars with spacing on a light background.</desc>
 
-    <rect width="300" height="300" fill="#fdf6f6" rx="28"/>
+    <rect width="300" height="300" fill="#f0eff8" rx="28"/>
 
+    <g transform="translate(0,-12)">
     <rect x ="34" y="112" width="34" height="102" rx="17" fill="#c4c7f0"/>
     <rect x ="82" y="80" width="34" height="158" rx="17" fill="#8b90d8"/>
     <rect x ="133" y="55" width="34" height="192" rx="17" fill="#4050e8"/>
     <rect x ="184" y="80" width="34" height="158" rx="17" fill="#8b90d8"/>
     <rect x ="232" y="112" width="34" height="102" rx="17" fill="#c4c7f0"/>
+    </g>
 </svg>
